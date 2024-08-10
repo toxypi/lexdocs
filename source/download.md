@@ -1,8 +1,4 @@
----
-layout: page
-title: Download
-permalink: /download/
----
+# Download
 
 ## Binary packages
 

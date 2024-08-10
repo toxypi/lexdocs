@@ -1,10 +1,4 @@
----
-layout: page
-title: License
-permalink: /license/
----
-
-## License
+# License
 
 The `lexbor` project and <https://lexbor.com> are licensed under the
 [Apache License, version 2.0](LICENSE-2.0.txt).
@@ -12,7 +6,7 @@ The `lexbor` project and <https://lexbor.com> are licensed under the
 
 ## Notice
 
-Copyright © 2023 Alexander Borisov.
+Copyright © 2024 Alexander Borisov.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License.

@@ -1,10 +1,4 @@
----
-layout: page
-title: Roadmap
-permalink: /roadmap/
----
-
-## Roadmap
+# Roadmap
 
 This section lists the most important modules involved in creating a browser
 engine.  The list will grow over time.

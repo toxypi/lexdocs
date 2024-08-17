@@ -68,7 +68,7 @@ The [module describes](https://drafts.csswg.org/css-values/) the grammar. In all
 modules, we will encounter grammars and basic CSS types.
 
 For example, for the `width` property, the grammar looks like:
-```HTML
+```
 width = auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>)
 ```
 
@@ -77,7 +77,7 @@ functions](https://drafts.csswg.org/css-values-4/#calc-syntax): `<length>`,
 `<angle>`, `<time>`, `min()`, `max()`, and so on.
 
 Let's look at how the `<length-percentage>` type breaks down:
-```HTML
+```
 <length-percentage> = <length> | <percentage-token>
 <length> = <dimension-token> | <number-token [0,0]>
 ```
@@ -438,7 +438,7 @@ syntax is structured. Values in grammars can have combinators and multipliers.
 - `<my> = c b a`
 
 **All Values from the List in Any Order**:
-```HTML
+```
 <my> = a && b && c
 ```
 
@@ -451,7 +451,7 @@ syntax is structured. Values in grammars can have combinators and multipliers.
 - `<my> = c b a`
 
 **Values can be Grouped**:
-```HTML
+```
 <my> = [ [a | b | c] && x ] r t v
 ```
 
@@ -528,7 +528,7 @@ That's all you need to know about grammar; the most crucial parts.
 
 Now, let's look at the grammar syntax for color:
 
-```HTML
+```
 <color> = <absolute-color-base> | currentcolor | <system-color>
 
 <absolute-color-base> = <hex-color> | <absolute-color-function> | <named-color> | transparent
@@ -606,7 +606,7 @@ positions in structures, and during serialization, they have a precise order.
 
 For example:
 
-```HTML
+```
 <x> = a && b && c
 ```
 
@@ -627,7 +627,7 @@ courage (not foolishness) pushed to tackle it head-on. And, as you understand,
 it didn't work out right away. I had to think!
 
 Let's look at such an example:
-```HTML
+```
 <x> = a && [x || y || [f && g && h]] && c
 ```
 

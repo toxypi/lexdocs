@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'lexbor'
-copyright = '2024, Alexandr Borisov'
-author = 'Alexandr Borisov'
+copyright = '2024, Alexander Borisov'
+author = 'Alexander Borisov'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -25,3 +25,4 @@ exclude_patterns = []
 
 html_theme = 'furo'
 html_static_path = ['_static']
+myst_heading_anchors = 3

@@ -394,7 +394,7 @@ example, with `/source/lexbor/html/base.h`:
 ```
 
 
-## Core Module
+## Core
 
 This is the base module; it implements all algorithms that are essential for
 the project, such as AVL and BST trees, arrays, strings and so on.  It also

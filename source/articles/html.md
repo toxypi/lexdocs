@@ -242,7 +242,7 @@ closing of the tag, but it can cause a parse error for non-void elements.
 A closing tag. It shares all properties of the opening tag token, but has a
 slash (`/`) before the tag name.
 
-```HTML
+```
 </div key="value" />
 ```
 
@@ -365,7 +365,7 @@ consequently, leads to reallocations and eventually to wasted time.
 If we assume, for example, that our HTML contains 1000 tags, and each tag has at
 least an attribute, then we get a hell of a slow parser.
 
-#### Character token
+### Character token
 
 The second problem is the character token. Apparently, we create a token for
 each character and pass it to tree construction. The construction stage does not
@@ -374,7 +374,7 @@ the desired number of characters. Accordingly, here we have all the same
 reallocations and continual checks for text nodes in the current state of the
 tree.
 
-#### Monolithic system
+### Monolithic system
 
 The ubiquitous dependencies between virtually everything are a real issue. The
 tokenizer depends on the tree construction, and the tree construction can affect
@@ -385,14 +385,14 @@ the tokenizer. All of this happens because of namespaces.
 I am going to outline an HTML parser implementation in my Lexbor project, as
 well as solutions to all problems voiced here.
 
-#### Preprocessing
+### Preprocessing
 
 For starters, let's get rid of the preprocessing. Instead, we upgrade the
 tokenizer to understand carriage return (`\r`) as a whitespace character.
 Therefore, it will be passed to the tree construction stage where we shall
 actually deal with it.
 
-#### Tokens
+### Tokens
 
 With a slight movement of the hand we unify all tokens. Instead, we use a single
 token for everything. Moreover, there will be only one token in existence during
@@ -406,7 +406,7 @@ Our unified token contains the following fields:
 4. Attributes
 5. Flags
 
-#### Tag ID
+### Tag ID
 
 We will not deal with the text representation of the tag name. Instead, we
 translate everything into numbers. They are easier to compare and to work with.
@@ -469,7 +469,7 @@ The logic is simple. If we have a tag with a specific case:
 1.	Add it to the general tag base in lower case. Get the tag ID. 2.	Add the
 tag ID and the original tag name in plain text to the node.
 
-#### Custom tags (custom elements)
+### Custom tags (custom elements)
 
 The developer can create any tags in HTML. Because our static hash table stores
 only those tags that we know about, but the user can create any tags, we need a
@@ -483,7 +483,7 @@ table.
 All of the above occurs at the tokenizer. All comparisons in the tokenizer and
 later use Tag ID (with rare exceptions).
 
-#### Begin and End
+### Begin and End
 
 Now we've got rid of data processing in the tokenizer. We do not copy or convert
 anything. We only get start/end data pointers.
@@ -491,12 +491,12 @@ anything. We only get start/end data pointers.
 All data, such as symbolic links, will be processed during the tree construction
 stage. Thus, we will know the data size for subsequent memory allocation.
 
-#### Attributes
+### Attributes
 
 It's just as simple. We don't copy anything, we just maintain start/end pointers
 of name and attribute values. All transformations occur at tree construction.
 
-#### Flags
+### Flags
 
 We have streamlined the token types, so we need to make a note of the token type
 for the tree. For this, we use the Flags bitmap field.
@@ -522,7 +522,7 @@ Beside the opening/closing token type, there are values for the data converter.
 Only the tokenizer knows how to convert data correctly. The tokenizer marks the
 token so that the data is processed accordingly.
 
-#### Character Token
+### Character Token
 
 We can now conclude that the character token has effectively disappeared. Yes,
 now we have a new type of token: `LXB_HTML_TOKEN_TYPE_TEXT`. Again, we create a
@@ -538,7 +538,7 @@ However, the tokenizer now vastly deviates from the specification. But we don't
 actually need this, that's OK. Our task is to get the HTML/DOM tree fully
 compliant with the specification.
 
-#### Tokenizer stages
+### Tokenizer stages
 
 To speed up data processing in the tokenizer, we add our own iterator at each
 stage. According to the specification, each stage accepts a single symbol and,
@@ -565,7 +565,7 @@ tokenizer, we supported chunks, but now we have broken the support.
 How to fix it? How to implement chunking support?! It's simple: enter the
 concept of incoming buffers.
 
-#### Incoming buffer
+### Incoming buffer
 
 Often, HTML is parsed in chunks; for example, if we receive data over the
 network. To avoid idling for the remaining data to arrive, we can send the
@@ -607,7 +607,7 @@ tail) after processing and retargeting the token pointer to our new buffer. It
 would be better and faster. However, this optimization is premature at the
 moment. Current implementation is fast and memory-efficient enough.
 
-#### A problem: the data in the token
+### A problem: the data in the token
 
 With chunk parsing figured out, you can breathe easier. But there is another
 problem with our pointer-based approach: At some point, we need to look at the
@@ -629,8 +629,8 @@ we need to update the construction stage to support the new token type.
 
 Here's how it looks:
 
-According to specification
-```C
+According to the specification,
+```
 tree_build_in_body_character(token) {
     if (token.code_point == '\0') {
         /* Parse error, ignore token */
@@ -722,10 +722,10 @@ in my own [Lexbor](https://github.com/lexbor/lexbor) HTML.
 Our next article will discuss CSS parsing and Grammar. As usual, the article
 will be accompanied by real code.
 
-#### For those who have time
+### For those who have time
 
 Feel free to help the project. For example, if you like to write documentation
 in your spare time. Do not hesitate to support the project with your hard-earned
 money. [PM](mailto:borisov@lexbor.com) me for details.
 
-#### Thank you for your attention!
+### Thank you for your attention!
